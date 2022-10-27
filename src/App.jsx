@@ -1,22 +1,28 @@
 import './App.css'
-import Cards from './components/Cards'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
-import Heroe from './components/Heroe'
 import 'flowbite';
-function App() {
- 
+import NavBar from './components/NavBar';
+import { ApiProvider } from './context/ApiProvider';
+import ListHeroes from './components/ListHeroes';
+import HeroDetails from './components/HeroDetails';
 
+function App() {
+
+  
 
   return (
 
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Cards />}></Route> 
-          <Route path='/heroe/:id' element={<Heroe />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <ApiProvider>
+      <div className="App">
+        <BrowserRouter>
+          <NavBar  />
+          <Routes>
+            <Route path='/' element={<ListHeroes  />}></Route>
+            <Route path='/heroe/:id' element={<HeroDetails />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </ApiProvider>
 
   )
 }

@@ -1,62 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { myHeroe } from '../functions/functions'
-import NavBar from './NavBar'
 
-const Heroe = () => {
-    const [miheroe, setMiheroe] = useState(null)
-    const params = useParams()
-    useEffect(() => {
-        myHeroe(params.id, setMiheroe)
-    }, [])
-    return (
-        <>
-            <NavBar />
-           <div className='h-4'>
-           <h1 className='pt-4 text-4xl font-bold'>Personaje</h1>
+import React from 'react'
+
+const Heroe = ({data}) => {
+  return (
+    <div className='flex flex-wrap mx-1 lg:-mx-3 text-center pl-10 lg:p-5 '>
+     {data.map((card) =>(
+         <div className="p-4 ">
+         <div className="hover:scale-125 transition-all shadow-pink-500 w-full max-w-sm bg-gray-200 rounded-lg border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700">
+           <div className="flex justify-end px-4 pt-4">
            </div>
-            <div className='grid place-items-center h-screen'>
-                {miheroe != null ? (
-                   <div className=''>
-                     <div className=' white:bg-gray-400 hover:scale-125 transition-all shadow-pink-500 shadow dark:bg-gray-800 dark:border-gray-700 rounded-lg border'>
-                        <a
-                            href="#"
-                            className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-                        >
-                            <img
-                                className="object-cover w-full h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-                                src={miheroe.images.md}
-                                alt=""
-                            />
-                            <div className="flex flex-col justify-between p-4 leading-normal">
-                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                 {miheroe.name}
-                                </h5>
-                                <p className=" mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                    <span className='font-bold'>Nombre: </span> {miheroe.biography.fullName}
-                                </p>
-                                <p className=" mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                    <span className='font-bold'>Raza: </span> {miheroe.appearance.race}
-                                </p>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                <span className='font-bold'>Aparicion: </span> {miheroe.biography.firstAppearance}
-                                </p>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                <span className='font-bold'>Conexiones: </span> {miheroe.connections.groupAffiliation}
-                                </p>
-                                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                                <span className='font-bold'>Alineamiento: </span> {miheroe.biography.alignment}
-                                </p>
-                            </div>
-                        </a>
+           <div className="flex flex-col items-center pb-10 ">
+             <img
+               className="mb-3 w-24 h-24 rounded-full shadow-lg m-3 shadow-gray-500"
+               src={card.images.md}
+               alt={card.name}
+             />
+             <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+               {card.name}
+             </h5>
 
-                    </div>
-                   </div>
-                ) : ('no hay personaje')}
+             <div className="flex pr-6 pl-6 space-x-3 md:mt-6">
 
-            </div>
-        </>
+               <a href={`/heroe/${card.id}`} className="bg-gray-300 hover:bg-pink-200 text-slate-900 font-bold
+                py-2 px-2 rounded inline-flex items-center">
+                 <span className=''>Detalles</span>
+                 <svg aria-hidden="true" className=" ml-4 mr-1 w-4 h-4 animate-spin" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
+               </a>
+             </div>
+           </div>
+         </div>
+
+
+       </div>
+
+        
+
+    ))}
+   </div>
+
+        
     )
 }
 
+
 export default Heroe;
+

@@ -4,7 +4,9 @@ const urlBase ="https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.j
 
 const allChars = async (state) => {
     const req = await axios.get(urlBase)
-    state(req.data)
+    const heroejson = req.data
+    state(heroejson)
+   
 }
 
 const myHeroe = async (id, state) => {
@@ -13,4 +15,7 @@ const myHeroe = async (id, state) => {
     const h = heroReq.data
     state(h)
 }
+
 export{ allChars, myHeroe }
+
+

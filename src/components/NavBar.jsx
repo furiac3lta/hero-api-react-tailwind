@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Deadpool from '../assets/icons/Deadpool-Logo.svg';
-<script src="https://unpkg.com/flowbite@1.4.5/dist/flowbite.js"></script>
+import { ApiContext } from '../context/ApiProvider';
 
 export default function NavBar() {
-  return (
+  const { data, setheroFiltered } = useContext(ApiContext)
 
+const [query, setQuery] = useState("")
+
+const search = () => {
+  const results = data.filter((item) => item.name.toLowerCase().includes(query))
+  console.log(results)
+}
+
+  return (
+    
 <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
   <div className="container flex flex-wrap justify-between items-center mx-auto">
     <a href="/" className="flex items-center">
@@ -57,12 +66,16 @@ export default function NavBar() {
           </svg>
           <span className="sr-only">Search icon</span>
         </div>
+        <form onSubmit={ search()}>
         <input
           type="text"
           id="search-navbar"
           className="block p-2 pl-10 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-sm focus:ring-pink-500 focus:border-pink-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-pink-500 dark:focus:border-pink-500"
-          placeholder="Search a hero..."
+          placeholder="find you hero"
+          onChange={(e) => setQuery(e.target.value)}
+       
         />
+        </form>
       </div>
       <button
         data-collapse-toggle="navbar-search"
@@ -145,82 +158,5 @@ export default function NavBar() {
   </div>
 </nav>
 
-
-    
-  /*   <div>
-      <Navbar
-        fluid={true}
-        rounded={true}
-        className='items-center'
-      >
-        <Navbar.Brand href="">
-          <img className='h-6 pr-3' src={Deadpool} alt="Deadpool" />
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            SuperHeroApi
-          </span>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Navbar.Link
-            href="/"
-            className="text-#18181b hover:text-gray-400 visited:text-pink-600"
-          >
-            Home
-          </Navbar.Link>
-          <Navbar.Link href="/"
-            className="text-#18181b hover:text-gray-400 visited:text-pink-600">
-            Details
-          </Navbar.Link>
-          <Navbar.Link href="/"
-            className="text-#18181b hover:text-gray-400 visited:text-pink-600">
-            Contact
-          </Navbar.Link>
-          <div className="relative mx-auto text-gray-600 lg:block hidden">
-            <input
-              className=" border-pink-600 border-2 border-gray-300 bg-white h-10 pl-2 pr-8
-               rounded-lg text-sm focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500
-               disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-               invalid:border-pink-500 invalid:text-pink-600
-               focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-              type="search"
-              name="search"
-              placeholder="Search"
-            />
-            <button type="submit" className="absolute right-0 top-0 mt-3 mr-2">
-              <svg
-                className="text-gray-600 h-4 w-4 fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                id="Capa_1"
-                x="0px"
-                y="0px"
-                viewBox="0 0 56.966 56.966"
-                style={{ enableBackground: "new 0 0 56.966 56.966" }}
-                xmlSpace="preserve"
-                width="512px"
-                height="512px"
-              >
-                <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
-              </svg>
-            </button>
-          </div>
-        </Navbar.Collapse>
-        <Navbar.Brand href="https://flowbite.com/">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            width="24"
-
-          >
-            <path
-              d="M12 21q-3.75 0-6.375-2.625T3 12q0-3.75 2.625-6.375T12 3q.35 0 .688.025.337.025.662.075-1.025.725-1.637 1.887Q11.1 6.15 11.1 7.5q0 2.25 1.575 3.825Q14.25 12.9 16.5 12.9q1.375 0 2.525-.613 1.15-.612 1.875-1.637.05.325.075.662Q21 11.65 21 12q0 3.75-2.625 6.375T12 21Zm0-2q2.2 0 3.95-1.212 1.75-1.213 2.55-3.163-.5.125-1 .2-.5.075-1 .075-3.075 0-5.238-2.162Q9.1 10.575 9.1 7.5q0-.5.075-1t.2-1q-1.95.8-3.162 2.55Q5 9.8 5 12q0 2.9 2.05 4.95Q9.1 19 12 19Zm-.25-6.75Z"
-            />
-          </svg>
-          <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-            DarkMode
-          </span>
-        </Navbar.Brand>
-      </Navbar>
-    </div> */
   )
 }
