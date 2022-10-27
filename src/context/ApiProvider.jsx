@@ -9,6 +9,7 @@ export const ApiProvider = ({ children }) => {
     fetchData();
   }, [])
   const [heroFiltered, setheroFiltered] = useState([])
+   
   const fetchData = async () => {
     try {
       const getData = await fetch(urlBase)

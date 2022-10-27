@@ -9,7 +9,7 @@ export default function ListHeroes() {
 
   const[cards, setCards] = useState([])
 
-  const {data, status, heroFiltered} = useContext(ApiContext)
+  const {data, status} = useContext(ApiContext)
   
   useEffect(() => {
     setCards(data)

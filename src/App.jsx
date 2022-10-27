@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import { ApiProvider } from './context/ApiProvider';
 import ListHeroes from './components/ListHeroes';
 import HeroDetails from './components/HeroDetails';
+import Search from './components/Search';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <NavBar  />
           <Routes>
             <Route path='/' element={<ListHeroes  />}></Route>
+            <Route path='/search' element={<Search  />}></Route>
             <Route path='/heroe/:id' element={<HeroDetails />}></Route>
           </Routes>
         </BrowserRouter>
